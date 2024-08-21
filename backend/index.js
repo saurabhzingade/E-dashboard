@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 
 // const mongoose = require("mongoose");
 require("./db/config");
@@ -6,6 +7,7 @@ const app = express();
 const User = require("./db/User");
 
 app.use(express.json());
+app.use(cors());
 
 app.post("/register", async (req, resp) => {
   let user = new User(req.body);
