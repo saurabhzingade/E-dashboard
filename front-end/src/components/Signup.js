@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const collectData = async () => {
     console.warn(name, email, password);
@@ -16,6 +18,7 @@ const Signup = () => {
     });
     result = await result.json();
     console.warn(result);
+    navigate("/");
   };
 
   return (
