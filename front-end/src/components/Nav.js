@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Nav = () => {
   const auth = localStorage.getItem("user");
+  console.log(auth);
 
   const navigate = useNavigate();
   const logout = () => {
@@ -11,28 +12,29 @@ const Nav = () => {
   };
   return (
     <div>
-      <ul className="nav-ul">
-        <li>
-          <Link to="/">Products</Link>
-        </li>
-        <li>
-          <Link to="/add">Add Products</Link>
-        </li>
-        <li>
-          <Link to="/update">Update Products</Link>
-        </li>
-        <li>
-          <Link to="/profile">Profile</Link>
-        </li>
-
-        {auth ? (
+      {auth ? (
+        <ul className="nav-ul">
+          <li>
+            <Link to="/">Products</Link>
+          </li>
+          <li>
+            <Link to="/add">Add Products</Link>
+          </li>
+          <li>
+            <Link to="/update">Update Products</Link>
+          </li>
+          <li>
+            <Link to="/profile">Profile</Link>
+          </li>
           <li>
             <Link onClick={logout} to="/signup">
-              Logout
+              Logout ({JSON.parse(auth).name})
             </Link>
           </li>
-        ) : (
-          <>
+        </ul>
+      ) : (
+        <>
+          <ul className="nav-ul nav-right">
             <li>
               <Link to="/login">Login</Link>
             </li>
@@ -40,9 +42,9 @@ const Nav = () => {
               {" "}
               <Link to="/signup">signup</Link>
             </li>
-          </>
-        )}
-      </ul>
+          </ul>
+        </>
+      )}
     </div>
   );
 };

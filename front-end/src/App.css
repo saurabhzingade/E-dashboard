@@ -19,6 +19,10 @@
   padding: 10px;
 }
 
+.nav-right {
+  text-align: right;
+}
+
 .nav-ul li a {
   color: #fff;
   text-decoration: none;
