@@ -6,6 +6,8 @@ require("./db/config");
 const app = express();
 const User = require("./db/User");
 
+const Product = require("./db/Product");
+
 app.use(express.json());
 app.use(cors());
 
@@ -14,6 +16,12 @@ app.post("/register", async (req, resp) => {
   let result = await user.save();
   result = result.toObject();
   delete result.password;
+  resp.send(result);
+});
+
+app.post("/add-product", async (req, resp) => {
+  let product = new Product(req.body);
+  let result = await product.save();
   resp.send(result);
 });
 
