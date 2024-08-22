@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const UpdateComponent = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [company, setCompany] = useState("");
-  const [error, setError] = useState(false);
+  const params = useParams();
+
+  useEffect(() => {
+    getProductDetails();
+  }, []);
+
+  const getProductDetails = async (id) => {
+    console.warn(params);
+    let result = await fetch(`http://localhost:5000/product/${params.id}`);
+    result = await result.json();
+    console.log(result);
+    setName(result.name);
+    setPrice(result.price);
+    setCategory(result.category);
+    setCompany(result.company);
+  };
 
   const updateProduct = async () => {
     console.warn(name, price, category, company);
@@ -18,6 +34,7 @@ const UpdateComponent = () => {
       <input
         className="inputBox"
         type="text"
+        value={name}
         placeholder="Enter Product name"
         onChange={(e) => {
           setName(e.target.value);
@@ -25,6 +42,7 @@ const UpdateComponent = () => {
       ></input>
 
       <input
+        value={price}
         className="inputBox"
         type="text"
         placeholder="Enter Product Price"
@@ -34,6 +52,7 @@ const UpdateComponent = () => {
       ></input>
 
       <input
+        value={category}
         className="inputBox"
         type="text"
         placeholder="Enter Product Category"
@@ -43,6 +62,7 @@ const UpdateComponent = () => {
       ></input>
 
       <input
+        value={company}
         className="inputBox"
         type="text"
         placeholder="Enter Product Company"
