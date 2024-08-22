@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Nav = () => {
   const auth = localStorage.getItem("user");
-  console.log(auth);
 
   const navigate = useNavigate();
   const logout = () => {
