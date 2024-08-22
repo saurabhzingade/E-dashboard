@@ -4,6 +4,7 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Signup from "./components/Signup";
 import PrivateComponent from "./components/PrivateComponent";
+import Login from "./components/Login";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/profile" element={<h1>Profile Component</h1>}></Route>
           </Route>
           <Route path="/signup" element={<Signup />}></Route>
+          <Route path="/login" element={<Login />}></Route>
         </Routes>
       </BrowserRouter>
       <Footer />
