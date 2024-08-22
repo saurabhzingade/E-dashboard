@@ -29,6 +29,13 @@
   padding: 5px;
 }
 
+.invalid-input {
+  display: block;
+  color: red;
+  margin-top: -20px;
+  margin-left: 20px;
+}
+
 .nav-ul {
   padding: 5px;
   margin: 0px;
