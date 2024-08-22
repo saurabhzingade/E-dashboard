@@ -48,4 +48,13 @@ app.post("/login", async (req, resp) => {
 
 // connectDB();
 
+app.get("/products", async (req, resp) => {
+  const products = await Product.find();
+  if (products.length > 0) {
+    resp.send(products);
+  } else {
+    resp.send({ result: "No Products found" });
+  }
+});
+
 app.listen(5000);
