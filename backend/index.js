@@ -71,4 +71,12 @@ app.get("/product/:id", async (req, resp) => {
   }
 });
 
+app.put("/product/:id", async (req, resp) => {
+  let result = await Product.updateOne(
+    { _id: req.params.id },
+    { $set: req.body }
+  );
+  resp.send(result);
+});
+
 app.listen(5000);
