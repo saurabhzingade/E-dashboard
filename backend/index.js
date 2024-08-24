@@ -8,6 +8,9 @@ const User = require("./db/User");
 
 const Product = require("./db/Product");
 
+const Jwt = require("jsonwebtoken");
+const jwtKey = "e-comm";
+
 app.use(express.json());
 app.use(cors());
 
@@ -29,7 +32,12 @@ app.post("/login", async (req, resp) => {
   if (req.body.password && req.body.email) {
     let user = await User.findOne(req.body).select("-password");
     if (user) {
-      resp.send(user);
+      Jwt.sign({ user }, jwtKey, { expiresIn: "2h" }, (err, token) => {
+        if (err) {
+          resp.send({ result: "Soemthing went wrong" });
+        }
+        resp.send({ user, auth: token });
+      });
     } else {
       resp.send({ result: "No User Found" });
     }
