@@ -19,7 +19,12 @@ app.post("/register", async (req, resp) => {
   let result = await user.save();
   result = result.toObject();
   delete result.password;
-  resp.send(result);
+  Jwt.sign({ result }, jwtKey, { expiresIn: "2h" }, (err, token) => {
+    if (err) {
+      resp.send({ result: "Soemthing went wrong" });
+    }
+    resp.send({ result, auth: token });
+  });
 });
 
 app.post("/add-product", async (req, resp) => {
