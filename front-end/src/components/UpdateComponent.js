@@ -28,10 +28,11 @@ const UpdateComponent = () => {
   const updateProduct = async () => {
     console.warn(name, price, category, company);
     let result = await fetch(`http://localhost:5000/product/${params.id}`, {
-      method: "Put",
+      method: "put",
       body: JSON.stringify({ name, price, category, company }),
       headers: {
-        "Content-Type": "Application/json",
+        "Content-type": "application/json",
+        authorization: JSON.parse(localStorage.getItem("token")),
       },
     });
 
